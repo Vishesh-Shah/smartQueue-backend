@@ -1,10 +1,17 @@
 # SmartQueue Backend
 
-🎥 **[Demo Video](https://your-demo-video-link.com)** | 🚀 **[Live Demo](https://your-deployed-app-link.com)**
-
 A Spring Boot-based queue management system that allows businesses to manage customer queues digitally, reducing wait times and improving customer experience.
 
-## Features
+## 📹 Demo Video
+
+*Demo video will be added here*
+
+## 🌐 Live Demo
+
+🌐 **Frontend**: [Add your deployed frontend URL here]  
+🔗 **Backend API**: [Add your deployed backend URL here]
+
+## 🚀 Features
 
 ### Core Functionality
 - **Digital Queue Management**: Create and manage virtual queues for events/services
