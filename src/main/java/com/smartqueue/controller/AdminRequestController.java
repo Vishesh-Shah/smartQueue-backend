@@ -24,10 +24,17 @@ public class AdminRequestController {
         try {
             System.out.println("Received admin request: " + requestData);
             
+            String email = requestData.get("email");
+            
+            // Check if email already exists
+            if (adminRequestRepository.existsByEmail(email)) {
+                return ResponseEntity.badRequest().body("Admin request with this email already exists");
+            }
+            
             AdminRequest adminRequest = new AdminRequest();
             adminRequest.setBusinessName(requestData.get("businessName"));
             adminRequest.setOwnerName(requestData.get("ownerName"));
-            adminRequest.setEmail(requestData.get("email"));
+            adminRequest.setEmail(email);
             adminRequest.setPhone(requestData.get("phone"));
             adminRequest.setBusinessAddress(requestData.get("businessAddress"));
             adminRequest.setBusinessType(requestData.get("businessType"));
@@ -40,6 +47,9 @@ public class AdminRequestController {
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
             e.printStackTrace();
+            if (e.getMessage().contains("constraint") || e.getMessage().contains("duplicate")) {
+                return ResponseEntity.badRequest().body("Admin request with this email already exists");
+            }
             return ResponseEntity.status(500).body("Error: " + e.getMessage());
         }
     }

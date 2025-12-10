@@ -43,6 +43,30 @@ public class AdminEventController {
         }
     }
 
+    @DeleteMapping("/events/all")
+    public ResponseEntity<?> deleteAllEvents() {
+        try {
+            eventRepository.deleteAll();
+            System.out.println("=== ALL EVENTS DELETED ===");
+            return ResponseEntity.ok("All events deleted successfully");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Error: " + e.getMessage());
+        }
+    }
+
+    @PostMapping("/events/{id}/fix-count")
+    public ResponseEntity<?> fixEventCount(@PathVariable Long id) {
+        try {
+            Event event = eventRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Event not found"));
+            event.setCurrentTokenCount(0);
+            eventRepository.save(event);
+            return ResponseEntity.ok("Event count reset to 0");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Error: " + e.getMessage());
+        }
+    }
+
     public static class EventRequest {
         private String eventName;
         private Integer maxTokens;

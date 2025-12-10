@@ -103,13 +103,6 @@ public class QueueService {
         queueEntryRepository.saveAll(waiting);
         queueEntryRepository.save(next);
 
-        // Update event's current token count
-        Event event = next.getEvent();
-        if (event.getCurrentTokenCount() > 0) {
-            event.setCurrentTokenCount(event.getCurrentTokenCount() - 1);
-            eventRepository.save(event);
-        }
-
         return next;
     }
 
@@ -117,9 +110,19 @@ public class QueueService {
         QueueEntry entry = queueEntryRepository.findById(ticketId)
                 .orElseThrow(() -> new RuntimeException("Ticket not found"));
 
+        String oldStatus = entry.getStatus();
         entry.setStatus("DONE");
         entry.setUpdatedAt(ZonedDateTime.now());
         queueEntryRepository.save(entry);
+
+        // Decrement count only if it was WAITING or IN_PROGRESS
+        if ("WAITING".equals(oldStatus) || "IN_PROGRESS".equals(oldStatus)) {
+            Event event = entry.getEvent();
+            if (event.getCurrentTokenCount() > 0) {
+                event.setCurrentTokenCount(event.getCurrentTokenCount() - 1);
+                eventRepository.save(event);
+            }
+        }
 
         return entry;
     }
@@ -128,9 +131,19 @@ public class QueueService {
         QueueEntry entry = queueEntryRepository.findById(ticketId)
                 .orElseThrow(() -> new RuntimeException("Ticket not found"));
 
+        String oldStatus = entry.getStatus();
         entry.setStatus("SKIPPED");
         entry.setUpdatedAt(ZonedDateTime.now());
         queueEntryRepository.save(entry);
+
+        // Decrement count only if it was WAITING or IN_PROGRESS
+        if ("WAITING".equals(oldStatus) || "IN_PROGRESS".equals(oldStatus)) {
+            Event event = entry.getEvent();
+            if (event.getCurrentTokenCount() > 0) {
+                event.setCurrentTokenCount(event.getCurrentTokenCount() - 1);
+                eventRepository.save(event);
+            }
+        }
 
         return entry;
     }

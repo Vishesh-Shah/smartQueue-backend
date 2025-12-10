@@ -23,4 +23,6 @@ public interface QueueEntryRepository extends JpaRepository<QueueEntry, Long> {
 
     @Query("SELECT DISTINCT q FROM QueueEntry q WHERE q.event.id = :eventId ORDER BY q.position")
     List<QueueEntry> findAllByEventId(@Param("eventId") Long eventId);
+
+    List<QueueEntry> findByStatusIn(List<String> statuses);
 }
