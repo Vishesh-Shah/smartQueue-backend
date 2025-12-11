@@ -6,6 +6,11 @@ A Spring Boot-based queue management system that allows businesses to manage cus
 ## 🎥 Project Demo Video
 [▶️ Watch Demo Video](https://drive.google.com/file/d/12o9gY6HG8ty95Z8edJWnZJrCbF-uyLwt/view?usp=sharing)
 
+## 🔗 Frontend Repository
+You can find the frontend code here:  
+👉 https://github.com/Vishesh-Shah/smartQueue-frontend
+
+
 ## 🚀 Features
 
 ### Core Functionality
