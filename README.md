@@ -2,14 +2,9 @@
 
 A Spring Boot-based queue management system that allows businesses to manage customer queues digitally, reducing wait times and improving customer experience.
 
-## 📹 Demo Video
 
-*Demo video will be added here*
-
-## 🌐 Live Demo
-
-🌐 **Frontend**: [Add your deployed frontend URL here]  
-🔗 **Backend API**: [Add your deployed backend URL here]
+## 🎥 Project Demo Video
+[▶️ Watch Demo Video](https://drive.google.com/file/d/12o9gY6HG8ty95Z8edJWnZJrCbF-uyLwt/view?usp=sharing)
 
 ## 🚀 Features
 
